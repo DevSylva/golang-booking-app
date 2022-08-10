@@ -1,8 +1,9 @@
-package main
+package helper
 
 import (
 	"fmt"
 	"strings"
+	"helper"
 )
 
 var conferenceName = "Go conference"
@@ -21,7 +22,7 @@ func main() {
 
 		firstName, lastName, email, userTickets := getUserInput()
 		
-		isValidName, isValidEmail, isValidTicketNumber := validateuserInput(firstName, lastName, email, userTickets, remainingTickets)
+		isValidName, isValidEmail, isValidTicketNumber := helper.ValidateuserInput(firstName, lastName, email, userTickets, remainingTickets)
 
 		if isValidTicketNumber && isValidName && isValidEmail{
 			// book ticket
@@ -30,8 +31,8 @@ func main() {
 			
 
 			// call function print first names
-			firstNames := getFirstNames(bookings)
-			fmt.Printf("the first names of bookins are %v", firstNames)
+			
+			fmt.Printf("the first names of bookins are %v", getFirstNames(bookings))
 			
 			if remainingTickets == 0 {
 				// end the program
@@ -70,13 +71,7 @@ func getFirstNames(bookings []string) []string {
 	return firstNames
 }
 
-func validateuserInput(firstName string, lastName string, email string, userTickets uint, remainingTickets uint) (bool, bool, bool){
-	// user input validations
-	isValidName := len(firstName) >= 2 && len(lastName) >=2
-	isValidEmail := strings.Contains(email, "@")
-	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
-	return isValidName, isValidEmail, isValidTicketNumber
-}
+
 
 func getUserInput() (string, string, string, uint) {
 	var firstName string
